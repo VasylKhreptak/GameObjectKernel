@@ -1,39 +1,31 @@
 using System.Collections.Generic;
 using Plugins.GameObjectKernel.Events;
+using Sirenix.OdinInspector;
+using UnityEngine;
 using Zenject;
 
-namespace Plugins.GameObjectKernel
+namespace Tests
 {
-    public class ToggleableManager
+    public class LocalInjectTest : MonoBehaviour
     {
         [Inject(Optional = true, Source = InjectSources.Local)]
         private readonly List<IEnableEventHandler> _enableEventHandlers = new List<IEnableEventHandler>();
 
         [Inject(Optional = true, Source = InjectSources.Local)]
         private readonly List<IDisableEventHandler> _disableEventHandlers = new List<IDisableEventHandler>();
-
-        private bool _isEnabled;
-
-        public void Enable()
+        
+        [Button]
+        private void Enable()
         {
-            if (_isEnabled)
-                return;
-
             foreach (IEnableEventHandler enableEventHandler in _enableEventHandlers)
                 enableEventHandler.OnEnable();
-
-            _isEnabled = true;
         }
 
-        public void Disable()
+        [Button]
+        private void Disable()
         {
-            if (_isEnabled == false)
-                return;
-
             foreach (IDisableEventHandler disableable in _disableEventHandlers)
                 disableable.OnDisable();
-
-            _isEnabled = false;
         }
     }
 }

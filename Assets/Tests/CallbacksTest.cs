@@ -3,7 +3,7 @@ using Plugins.GameObjectKernel.Events;
 using UnityEngine;
 using Zenject;
 
-namespace Plugins.Tests
+namespace Tests
 {
     public class CallbacksTest : IInitializable, IEnableEventHandler, IDisableEventHandler, ITickable, IFixedTickable, ILateTickable,
         IDisposable
